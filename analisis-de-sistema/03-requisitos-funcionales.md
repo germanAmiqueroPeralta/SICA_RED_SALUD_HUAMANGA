@@ -7,10 +7,9 @@
 | **RF-03** | El sistema debe mostrar el estado de cumplimiento de cada paquete de atención integral del niño (CRED, vacunas, suplementación con hierro, tamizajes, visitas domiciliarias, entre otros). |
 | **RF-04** | El sistema debe señalar las atenciones pendientes o próximas a vencer del niño consultado, a manera de alerta visible para el padre o tutor. |
 | **RF-05** | El sistema debe limitar la cantidad de solicitudes que un mismo usuario puede realizar en una ventana de tiempo determinada, y mostrar un mensaje de espera cuando se alcance dicho límite. |
-| **RF-06** | El sistema debe permitir que el personal de salud registre y actualice las atenciones brindadas, de modo que la consulta pública refleje información vigente. |
-| **RF-07** | El sistema debe sincronizar la información de atenciones con el sistema HIS de la Red de Salud Huamanga. |
-| **RF-08** | El sistema debe registrar un log de cada consulta pública realizada (fecha, hora y resultado), con fines de auditoría y trazabilidad. |
-| **RF-09** | El sistema debe presentar la información de la consulta pública en una interfaz responsiva, utilizable desde un teléfono móvil. |
+| **RF-06** | El sistema debe sincronizar la información de atenciones con el sistema HIS de la Red de Salud Huamanga. |
+| **RF-07** | El sistema debe registrar un log de cada consulta pública realizada (fecha, hora y resultado), con fines de auditoría y trazabilidad. |
+| **RF-08** | El sistema debe presentar la información de la consulta pública en una interfaz responsiva, utilizable desde un teléfono móvil. |
 
 ## Relación entre historias de usuario y requisitos funcionales
 
@@ -18,8 +17,7 @@
 |-------------------------|-----------------------------------------|
 | **HU01 – Consultar estado de atención** | RF-01, RF-02, RF-03 |
 | **HU02 – Ver atenciones pendientes** | RF-04 |
-| **HU03 – Consultar desde el móvil** | RF-09 |
-| **HU04 – Registrar atenciones** | RF-06 |
-| **HU05 – Sincronizar con HIS** | RF-07 |
-| **HU06 – Auditar consultas** | RF-08 |
-| **HU07 – Controlar tráfico** | RF-05 |
+| **HU03 – Consultar desde el móvil** | RF-08 |
+| **HU04 – Sincronizar con HIS** | RF-06 |
+| **HU05 – Auditar consultas** | RF-07 |
+| **HU06 – Controlar tráfico** | RF-05 |
