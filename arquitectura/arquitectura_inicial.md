@@ -122,4 +122,5 @@ La arquitectura inicial se organiza en tres capas principales:
 
 Además, el módulo de **Validación de identidad** se integra con **RENIEC** para verificar el DNI, y el módulo de **Carga de datos** obtiene las atenciones desde **SQL Server**, donde los registradores digitan la información fuera de SICA.
 
-El detalle de contenedores y componentes de esta arquitectura se documenta en [`arquitectura-c4.md`](arquitectura-c4.md) y el flujo de una consulta en [`flujo-consulta.md`](flujo-consulta.md).
+
+
