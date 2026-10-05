@@ -124,19 +124,3 @@ style SQLS fill:#eee,stroke:#333,stroke-dasharray: 5 5,color:#222
 | **Administración** | Gestionar catálogos, usuarios y reportes. | Actor Administrador UEI |
 | **Transversal (middlewares)** | Limitador de tasa, HTTPS, validación de entrada, manejo de errores, logs. | RF-05 |
 
-## Reglas de la arquitectura
-
-1. Cada capa solo invoca a la capa inmediatamente inferior (Presentación → Lógica de negocio → Datos).
-2. Un módulo **no** accede al *repository* ni a las tablas de otro módulo; se comunica llamando a su *service*.
-3. Todo el backend se ejecuta desde **una sola imagen Docker**; se despliegan varias instancias idénticas sin estado detrás del balanceador.
-4. La **Carga de Datos** se ejecuta como tarea programada en un proceso separado del mismo artefacto, escribiendo en la base principal; las consultas leen de la réplica y del caché.
-5. La organización interna de cada módulo (dependencias hacia el dominio) se define con **Clean Architecture**: ver [enfoque-arquitectonico.md](enfoque-arquitectonico.md).
-
-## ¿Por qué este estilo y no otro?
-
-| **Estilo** | **Evaluación para SICA** |
-|------------|--------------------------|
-| **Monolito modular en capas** ✅ | Simple de construir y desplegar, suficiente para el alcance académico (RC05); escala replicando instancias y mantiene módulos desacoplados. |
-| **Microservicios** | Escalado independiente por servicio, pero alto costo operativo (despliegues, red, monitoreo distribuido) para un equipo y alcance pequeños. |
-| **Monolito en capas sin módulos** | Más simple, pero las funcionalidades quedan acopladas y se incumple DA08. |
-| **Serverless** | Dependencia de un proveedor de nube; contradice la portabilidad con Docker (RC02, DA09). |
