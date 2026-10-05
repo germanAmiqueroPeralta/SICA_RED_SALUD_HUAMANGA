@@ -8,7 +8,7 @@
 | **Monolito** | Unidad de despliegue: todo el backend se construye y despliega como una sola aplicación (una imagen Docker). |
 | **Modular** | Organización por dominio funcional: Identidad, Consulta de Paquetes, Alertas, Carga de Datos, Auditoría y Administración. |
 | **En capas** | Organización lógica dentro de cada módulo: Presentación → Lógica de negocio → Datos. |
-| **Decisión que lo respalda** | [ADR-001](../analisis-de-sistema/07-decisiones-arquitectonicas.md#adr-001-monolito-modular-en-capas) |
+| **Decisión que lo respalda** | [ADR-001](../analisis-de-sistema/07-decisiones-arquitectonicas.md) |
 | **Drivers que atiende** | DA01 – Escalabilidad, DA03 – Disponibilidad, DA08 – Evolución modular, DA09 – Portabilidad, DA10 – API REST. |
 
 > **Capas** = organización lógica del código. **Monolito** = unidad de despliegue. Ambos conceptos coexisten: un monolito puede (y debe) estar organizado internamente en capas y módulos.
@@ -130,7 +130,7 @@ style SQLS fill:#eee,stroke:#333,stroke-dasharray: 5 5,color:#222
 2. Un módulo **no** accede al *repository* ni a las tablas de otro módulo; se comunica llamando a su *service*.
 3. Todo el backend se ejecuta desde **una sola imagen Docker**; se despliegan varias instancias idénticas sin estado detrás del balanceador.
 4. La **Carga de Datos** se ejecuta como tarea programada en un proceso separado del mismo artefacto, escribiendo en la base principal; las consultas leen de la réplica y del caché.
-5. La organización interna de cada módulo (dependencias hacia el dominio) se define con **Clean Architecture**: ver [enfoque/enfoque-arquitectonico.md](enfoque/enfoque-arquitectonico.md).
+5. La organización interna de cada módulo (dependencias hacia el dominio) se define con **Clean Architecture**: ver [enfoque-arquitectonico.md](enfoque-arquitectonico.md).
 
 ## ¿Por qué este estilo y no otro?
 

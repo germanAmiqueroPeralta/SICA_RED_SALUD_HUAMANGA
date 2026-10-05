@@ -18,37 +18,3 @@ Un **ADR** (*Architecture Decision Record*, Registro de Decisión Arquitectónic
 | **ADR-010** | Auditoría transversal | DA11 – Auditoría | Registrar cada consulta pública sin mezclar esta responsabilidad con la lógica de consulta. | Módulo de Auditoría con contrato `RegistroAuditoria`, invocado desde los casos de uso. |
 | **ADR-011** | Despliegue en contenedores Docker | DA09 – Portabilidad | Ejecutar el mismo artefacto en local, servidor de la universidad o nube. | Una imagen Docker del backend; configuración por variables de entorno. |
 
-## Detalle de las decisiones principales
-
-### ADR-001: Monolito modular en capas
-
-- **Contexto:** SICA tiene pocas funcionalidades, un equipo pequeño y un alcance académico (RC05). Aun así, debe soportar picos de consulta (DA01) y evolucionar sin romper otros módulos (DA08).
-- **Decisión:** construir el backend como **un único monolito modular**, organizado internamente en **capas** (presentación, lógica de negocio, datos) y dividido en **módulos por dominio funcional**.
-- **Alternativas evaluadas:**
-  - *Microservicios:* resuelven el escalado independiente, pero agregan complejidad operativa (red, despliegues, observabilidad) desproporcionada para el alcance.
-  - *Monolito en capas sin módulos:* simple, pero acopla las funcionalidades entre sí y dificulta la evolución.
-- **Consecuencias:**
-  - (+) Un solo código base, un solo despliegue y una sola imagen Docker.
-  - (+) El escalado se logra replicando instancias idénticas (ADR-007).
-  - (+) Los límites entre módulos permiten extraer un módulo como servicio en el futuro si fuera necesario.
-  - (−) Todos los módulos escalan juntos; se mitiga con caché (ADR-003) y réplica de lectura (ADR-004).
-
-### ADR-002: Clean Architecture
-
-- **Contexto:** las reglas del negocio (qué paquete está cumplido, qué atención está por vencer) no deben depender de Redis, PostgreSQL, SQL Server ni RENIEC (DA07).
-- **Decisión:** aplicar **Clean Architecture** dentro de cada módulo: las dependencias del código apuntan siempre hacia el dominio.
-- **Alternativas evaluadas:** arquitectura hexagonal u Onion (equivalentes en intención); MVC tradicional (no aísla el dominio de la persistencia).
-- **Consecuencias:**
-  - (+) El dominio se prueba sin base de datos ni red.
-  - (+) Cambiar Redis, el proveedor de identidad o la fuente de datos solo requiere un nuevo adaptador.
-  - (−) Más archivos e interfaces que un diseño en capas simple.
-
-Detalle en [enfoque/enfoque-arquitectonico.md](../arquitectura/enfoque/enfoque-arquitectonico.md).
-
-### ADR-004: Réplica de lectura y carga en proceso separado
-
-- **Contexto:** la consulta ciudadana es masiva y de solo lectura; la carga desde SQL Server escribe en bloque (DA03, DA06).
-- **Decisión:** las consultas leen de una **réplica de solo lectura** y la carga se ejecuta como **tarea programada en un proceso separado** del mismo artefacto (misma imagen, otro rol de ejecución).
-- **Consecuencias:**
-  - (+) Un pico de consultas no bloquea la carga, y viceversa.
-  - (−) Los datos de la réplica pueden tener un retraso breve respecto a la base principal (consistencia eventual), aceptable porque la carga ya es periódica.

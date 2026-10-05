@@ -1,6 +1,6 @@
 # Enfoque arquitectónico: Clean Architecture
 
-Mientras el [estilo arquitectónico](../estilo-arquitectonico.md) define la forma global del sistema (monolito modular en capas), el **enfoque** define cómo se organizan las responsabilidades y las dependencias **dentro** de cada módulo.
+Mientras el [estilo arquitectónico](estilo-arquitectonico.md) define la forma global del sistema (monolito modular en capas), el **enfoque** define cómo se organizan las responsabilidades y las dependencias **dentro** de cada módulo.
 
 | **Elemento** | **Descripción aplicada a SICA** |
 |--------------|---------------------------------|
@@ -8,7 +8,7 @@ Mientras el [estilo arquitectónico](../estilo-arquitectonico.md) define la form
 | **Objetivo** | Separar responsabilidades y controlar que las dependencias apunten siempre hacia el dominio. |
 | **¿Qué problema resuelve?** | Evita el acoplamiento entre el portal web, las reglas de atención integral del niño y las tecnologías externas: PostgreSQL, Redis, SQL Server y RENIEC. |
 | **Capas definidas** | Presentación, Aplicación, Dominio e Infraestructura. |
-| **Decisión que lo respalda** | [ADR-002](../../analisis-de-sistema/07-decisiones-arquitectonicas.md#adr-002-clean-architecture) |
+| **Decisión que lo respalda** | [ADR-002](../analisis-de-sistema/07-decisiones-arquitectonicas.md) |
 | **Drivers que atiende** | DA07 – Mantenibilidad, DA08 – Evolución modular, DA05 – RENIEC, DA06 – Carga desde SQL Server. |
 | **Beneficios** | • Facilita el mantenimiento y las pruebas unitarias del dominio sin base de datos ni red.<br/>• Permite cambiar implementaciones técnicas (Redis, RENIEC, SQL Server) sin modificar las reglas del negocio.<br/>• Mejora la organización y la separación de responsabilidades del código. |
 
@@ -173,4 +173,4 @@ sica-backend/
 └── .env.example
 ```
 
-Cada módulo del monolito (ver [estilo arquitectónico](../estilo-arquitectonico.md)) repite internamente las cuatro capas de Clean Architecture; así se combinan la **modularidad horizontal** (por funcionalidad) y la **separación vertical** (por capas con dependencias hacia el dominio).
+Cada módulo del monolito (ver [estilo arquitectónico](estilo-arquitectonico.md)) repite internamente las cuatro capas de Clean Architecture; así se combinan la **modularidad horizontal** (por funcionalidad) y la **separación vertical** (por capas con dependencias hacia el dominio).
